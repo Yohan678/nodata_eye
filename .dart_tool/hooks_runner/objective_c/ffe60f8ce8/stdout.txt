@@ -1,0 +1,52 @@
+Running `(cd /Users/yohan/.pub-cache/hosted/pub.dev/objective_c-9.5.0/; TMPDIR=/var/folders/3w/_rx6x3vx5mz0j35stzc3m3mh0000gn/T/ PATH=/Applications/Xcode.app/Contents/SharedFrameworks/SwiftBuild.framework/Versions/A/PlugIns/SWBBuildService.bundle/Contents/PlugIns/SWBUniversalPlatformPlugin.bundle/Contents/Frameworks/SWBUniversalPlatform.framework/Resources:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/local/bin:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/libexec:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/usr/bin:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/usr/local/bin:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/local/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/local/bin:/Users/yohan/flutter/bin/:/Users/yohan/Library/Application Support/Code/User/globalStorage/github.copilot-chat/debugCommand:/Users/yohan/Library/Application Support/Code/User/globalStorage/github.copilot-chat/copilotCli:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/usr/local/share/dotnet:/Users/yohan/flutter/bin:/Users/yohan/.unity/bin HOME=/Users/yohan /Users/yohan/flutter/bin/cache/dart-sdk/bin/dart --packages=/Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/package_config.json /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/objective_c/ffe60f8ce8/hook.dill --config=/Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/objective_c/ffe60f8ce8/input.json )`.
+INFO: 2026-10-10 13:42:03.740714: Using compiler /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang from BuildInput.cCompiler.cc.
+
+INFO: 2026-10-10 13:42:03.754769: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -target arm64-apple-ios -mios-version-min=15 -c /Users/yohan/.pub-cache/hosted/pub.dev/objective_c-9.5.0/src/include/dart_api_dl.c -fpic -gline-tables-only -I src -o /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/include/dart_api_dl.c.o
+
+INFO: 2026-10-10 13:42:03.755984: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -target arm64-apple-ios -mios-version-min=15 -c /Users/yohan/.pub-cache/hosted/pub.dev/objective_c-9.5.0/src/objective_c.c -fpic -gline-tables-only -I src -o /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/objective_c.c.o
+
+INFO: 2026-10-10 13:42:03.756132: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -target arm64-apple-ios -mios-version-min=15 -x objective-c -fobjc-arc -c /Users/yohan/.pub-cache/hosted/pub.dev/objective_c-9.5.0/src/input_stream_adapter.m -fpic -gline-tables-only -I src -o /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/input_stream_adapter.m.o
+
+INFO: 2026-10-10 13:42:03.756405: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -target arm64-apple-ios -mios-version-min=15 -x objective-c -fobjc-arc -c /Users/yohan/.pub-cache/hosted/pub.dev/objective_c-9.5.0/src/ns_number.m -fpic -gline-tables-only -I src -o /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/ns_number.m.o
+
+j/src/objective_c_bindings_generated.m.o
+
+INFO: 2026-10-10 13:42:03.825804: 
+INFO: 2026-10-10 13:42:03.825874: 
+INFO: 2026-10-10 13:42:03.825895: Generated /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/objective_c.c.o
+
+INFO: 2026-10-10 13:42:03.826350: 
+INFO: 2026-10-10 13:42:03.826364: 
+INFO: 2026-10-10 13:42:03.826373: Generated /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/include/dart_api_dl.c.o
+
+INFO: 2026-10-10 13:42:03.832406: 
+INFO: 2026-10-10 13:42:03.832444: 
+INFO: 2026-10-10 13:42:03.832454: Generated /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/observer.m.o
+
+INFO: 2026-10-10 13:42:03.836323: 
+INFO: 2026-10-10 13:42:03.836353: 
+INFO: 2026-10-10 13:42:03.836362: Generated /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/protocol.m.o
+
+INFO: 2026-10-10 13:42:03.924461: 
+INFO: 2026-10-10 13:42:03.924499: 
+INFO: 2026-10-10 13:42:03.924510: Generated /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/ns_number.m.o
+
+INFO: 2026-10-10 13:42:03.937427: 
+INFO: 2026-10-10 13:42:03.937461: 
+INFO: 2026-10-10 13:42:03.937471: Generated /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/input_stream_adapter.m.o
+
+INFO: 2026-10-10 13:42:03.940284: 
+INFO: 2026-10-10 13:42:03.940308: 
+INFO: 2026-10-10 13:42:03.940317: Generated /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/objective_c.m.o
+
+INFO: 2026-10-10 13:42:03.972508: 
+INFO: 2026-10-10 13:42:03.972546: 
+INFO: 2026-10-10 13:42:03.972557: Generated /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/objective_c_bindings_generated.m.o
+
+INFO: 2026-10-10 13:42:03.972846: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -shared -Wl,-encryptable -undefined dynamic_lookup -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -target arm64-apple-ios -mios-version-min=15 /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/include/dart_api_dl.c.o /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/objective_c.c.o /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/input_stream_adapter.m.o /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/objective_c.m.o /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/observer.m.o /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/ns_number.m.o /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/protocol.m.o /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/obj/src/objective_c_bindings_generated.m.o -o /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/objective_c.dylib
+
+INFO: 2026-10-10 13:42:03.999433: 
+INFO: 2026-10-10 13:42:03.999491: ld: warning: -undefined dynamic_lookup is deprecated on iOS
+
+INFO: 2026-10-10 13:42:03.999501: Generated /Volumes/yohan/02_Projects/02_Flutter/nodata_eye_web/.dart_tool/hooks_runner/shared/objective_c/build/ffe60f8ce8/objective_c.dylib
+
