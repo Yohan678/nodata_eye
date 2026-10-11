@@ -7,6 +7,7 @@ import 'package:camera/camera.dart';
 import 'package:http/http.dart' as http;
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:nodata_eye_web/toggle_widget.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +42,7 @@ class _WebCameraScreenState extends State<WebCameraScreen> {
 
   bool _isInitialized = false;
   bool _isProcessing = false;
+  bool _batterySaverEnabled = false;
   String _statusText = "Initializing camera...";
 
   Timer? _scanTimer;
@@ -106,12 +108,20 @@ class _WebCameraScreenState extends State<WebCameraScreen> {
   }
 
   void _startAutoScan() {
+    _scanTimer?.cancel();
     _scanTimer = Timer.periodic(
       const Duration(seconds: 3),
       (timer) {
         _captureAndAnalyze();
       },
     );
+  }
+
+  void _handleBatterySaverToggle(bool value) {
+    setState(() {
+      _batterySaverEnabled = value;
+      // 상태 텍스트(_statusText)는 덮어쓰지 않고 유지하여, 자막이 계속 보이도록 합니다.
+    });
   }
 
   @override
@@ -209,82 +219,127 @@ class _WebCameraScreenState extends State<WebCameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Auto-Scan Mode',
-          style: TextStyle(color: Colors.greenAccent),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.black,
-      ),
       backgroundColor: Colors.black,
-      body: !_isInitialized
-          ? Center(
-              child: Text(
-                _statusText,
-                style: const TextStyle(color: Colors.white),
+      body: SafeArea(
+        child: !_isInitialized
+            ? Center(
+                child: Text(
+                  _statusText,
+                  style: const TextStyle(color: Colors.white),
+                ),
+              )
+            : Stack(
+                children: [
+                  // 1. 카메라 화면 (항상 맨 밑바닥에 렌더링되게 유지)
+                  Positioned.fill(
+                    child: FittedBox(
+                      fit: BoxFit.cover,
+                      child: SizedBox(
+                        width: _controller!.value.previewSize?.height ?? 1,
+                        height: _controller!.value.previewSize?.width ?? 1,
+                        child: CameraPreview(_controller!),
+                      ),
+                    ),
+                  ),
+
+                  // 2. 배터리 세이버용 검은색 덮개 (스위치를 켰을 때만 카메라 위를 덮음)
+                  if (_batterySaverEnabled)
+                    Positioned.fill(
+                      child: Container(color: Colors.black),
+                    ),
+
+                  // 3. 배터리 세이버 모드 중앙 안내 텍스트
+                  if (_batterySaverEnabled)
+                    const Center(
+                      child: Text(
+                        'Battery Saver Mode',
+                        style: TextStyle(
+                          color: Colors.white54,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                    ),
+
+                  // 4. 하단 자막 텍스트 (모드 상관없이 항상 표시)
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.only(
+                        top: 50,
+                        bottom: 40,
+                        left: 20,
+                        right: 20,
+                      ),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.black.withOpacity(0.0),
+                            Colors.black87,
+                            Colors.black,
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                      child: Text(
+                        _statusText,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+
+                  // 5. 로딩 인디케이터 (카메라 뷰 상태일때만 우측 상단 표시)
+                  if (_isProcessing && !_batterySaverEnabled)
+                    const Positioned(
+                      top: 92,
+                      right: 22,
+                      child: SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          color: Colors.redAccent,
+                          strokeWidth: 3,
+                        ),
+                      ),
+                    ),
+
+                  // 6. 토글 위젯 (항상 최상단에 띄움)
+                  Positioned(
+                    top: 12,
+                    right: 16,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.55),
+                        borderRadius: BorderRadius.circular(18),
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.18),
+                        ),
+                      ),
+                      child: ToggleWidget(
+                        label: 'Battery Save',
+                        value: _batterySaverEnabled,
+                        onChanged: _handleBatterySaverToggle,
+                        activeColor: Colors.greenAccent,
+                        activeTrackColor: const Color(0xFFB9F6CA),
+                        inactiveTrackColor: const Color(0xFF3A3A3C),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            )
-          : Stack(
-              children: [
-                Positioned.fill(
-                  child: FittedBox(
-                    fit: BoxFit.cover,
-                    child: SizedBox(
-                      width:
-                          _controller!.value.previewSize?.height ?? 1,
-                      height:
-                          _controller!.value.previewSize?.width ?? 1,
-                      child: CameraPreview(_controller!),
-                    ),
-                  ),
-                ),
-                if (_isProcessing)
-                  const Positioned(
-                    top: 20,
-                    right: 20,
-                    child: SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(
-                        color: Colors.redAccent,
-                        strokeWidth: 3,
-                      ),
-                    ),
-                  ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.only(
-                      top: 50,
-                      bottom: 40,
-                      left: 20,
-                      right: 20,
-                    ),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.black.withOpacity(0.0),
-                          Colors.black87,
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                    ),
-                    child: Text(
-                      _statusText,
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+      ),
     );
   }
 }
