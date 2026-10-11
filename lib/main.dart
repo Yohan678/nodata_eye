@@ -46,7 +46,7 @@ class _WebCameraScreenState extends State<WebCameraScreen> {
   String _statusText = "Initializing camera...";
 
   Timer? _scanTimer;
-  String _lastDetectedText = "";
+  String _lastSpokenText = ""; // 마지막으로 처리된 텍스트
 
   // API Key from .env
   final String elevenLabsApiKey =
@@ -110,7 +110,7 @@ class _WebCameraScreenState extends State<WebCameraScreen> {
   void _startAutoScan() {
     _scanTimer?.cancel();
     _scanTimer = Timer.periodic(
-      const Duration(seconds: 3),
+      const Duration(seconds: 1),
       (timer) {
         _captureAndAnalyze();
       },
@@ -120,7 +120,6 @@ class _WebCameraScreenState extends State<WebCameraScreen> {
   void _handleBatterySaverToggle(bool value) {
     setState(() {
       _batterySaverEnabled = value;
-      // 상태 텍스트(_statusText)는 덮어쓰지 않고 유지하여, 자막이 계속 보이도록 합니다.
     });
   }
 
@@ -156,8 +155,7 @@ class _WebCameraScreenState extends State<WebCameraScreen> {
       String analysisText = "Cannot identify risk factors.";
 
       if (cvResponse.statusCode == 200) {
-        final jsonResponse =
-            jsonDecode(utf8.decode(cvResponse.bodyBytes));
+        final jsonResponse = jsonDecode(utf8.decode(cvResponse.bodyBytes));
         analysisText = jsonResponse['text'];
       }
 
@@ -167,12 +165,15 @@ class _WebCameraScreenState extends State<WebCameraScreen> {
         _statusText = analysisText;
       });
 
-      if (analysisText != _lastDetectedText &&
-          analysisText != "Cannot identify risk factors.") {
-        _lastDetectedText = analysisText;
+      // 감지된 내용이 있고, 방금 전과 다른 새로운 위험일 때
+      if (analysisText != "Cannot identify risk factors." &&
+          analysisText != _lastSpokenText) {
+        
+        // API 중복 호출을 막기 위해 텍스트를 즉시 갱신
+        _lastSpokenText = analysisText;
 
         HapticFeedback.heavyImpact();
-        print("🚨 [New Warning Detected] Playing TTS: $analysisText");
+        print("🚨 [New Warning Detected] Fetching TTS: $analysisText");
 
         final ttsUrl = Uri.parse(
           'https://api.elevenlabs.io/v1/text-to-speech/$voiceId',
@@ -196,6 +197,8 @@ class _WebCameraScreenState extends State<WebCameraScreen> {
         );
 
         if (ttsResponse.statusCode == 200) {
+          // 새로운 음성이 준비되면 재생 중이던 옛날 알림을 즉각 차단하고 새 알림을 켭니다.
+          await _audioPlayer.stop();
           await _audioPlayer.play(
             BytesSource(ttsResponse.bodyBytes),
           );
@@ -203,7 +206,7 @@ class _WebCameraScreenState extends State<WebCameraScreen> {
           print("ElevenLabs 오류: ${ttsResponse.statusCode}");
         }
       } else if (analysisText == "Cannot identify risk factors.") {
-        _lastDetectedText = "Cannot identify risk factors.";
+        _lastSpokenText = "Cannot identify risk factors.";
       }
     } catch (e) {
       print("🚨 분석 에러: $e");
@@ -230,7 +233,6 @@ class _WebCameraScreenState extends State<WebCameraScreen> {
               )
             : Stack(
                 children: [
-                  // 1. 카메라 화면 (항상 맨 밑바닥에 렌더링되게 유지)
                   Positioned.fill(
                     child: FittedBox(
                       fit: BoxFit.cover,
@@ -241,14 +243,10 @@ class _WebCameraScreenState extends State<WebCameraScreen> {
                       ),
                     ),
                   ),
-
-                  // 2. 배터리 세이버용 검은색 덮개 (스위치를 켰을 때만 카메라 위를 덮음)
                   if (_batterySaverEnabled)
                     Positioned.fill(
                       child: Container(color: Colors.black),
                     ),
-
-                  // 3. 배터리 세이버 모드 중앙 안내 텍스트
                   if (_batterySaverEnabled)
                     const Center(
                       child: Text(
@@ -261,8 +259,6 @@ class _WebCameraScreenState extends State<WebCameraScreen> {
                         ),
                       ),
                     ),
-
-                  // 4. 하단 자막 텍스트 (모드 상관없이 항상 표시)
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
@@ -295,8 +291,6 @@ class _WebCameraScreenState extends State<WebCameraScreen> {
                       ),
                     ),
                   ),
-
-                  // 5. 로딩 인디케이터 (카메라 뷰 상태일때만 우측 상단 표시)
                   if (_isProcessing && !_batterySaverEnabled)
                     const Positioned(
                       top: 92,
@@ -310,8 +304,6 @@ class _WebCameraScreenState extends State<WebCameraScreen> {
                         ),
                       ),
                     ),
-
-                  // 6. 토글 위젯 (항상 최상단에 띄움)
                   Positioned(
                     top: 12,
                     right: 16,
