@@ -26,7 +26,7 @@
 
 ## ⚙️ How It Works (Architecture)
 
-1.  **Auto-Capture:** The Flutter web app silently captures frames every 3 seconds and encodes them into Base64.
+1.  **Auto-Capture:** The Flutter web app silently captures frames every 1 seconds and encodes them into Base64.
 2.  **Transmission:** The data is securely sent to the Python backend via an HTTPS tunnel.
 3.  **Vision Analysis:** YOLO-World analyzes the frame. The backend calculates the area ratio of the bounding box to estimate distance and direction.
 4.  **TTS Generation:** If a hazard is detected, the warning text is sent to ElevenLabs to generate an MP3 audio file.
