@@ -49,3 +49,22 @@ pip install fastapi uvicorn ultralytics pillow pydantic
 
 # Run the FastAPI server
 python3 main.py
+```
+
+### 2. Frontend Setup
+```bash
+# Navigate to the frontend directory
+cd frontend
+
+# Run the Flutter web server
+flutter run -d web-server
+```
+
+## 🔮 What's Next
+1. Compile into native iOS and Android apps for deeper hardware integration (e.g., Blackout UI for battery saving).
+2. Expand the YOLO-World custom classes to detect urban obstacles like crosswalks and traffic lights.
+
+## 🤝 Contributors
+**Yohan Yoon** [Full-Stack Devleopment]
+**Zane Kaisir** [Backend Development]
+**Summer Green** [Computer Vision]
