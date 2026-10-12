@@ -1,6 +1,5 @@
 # 🚶 Safe Step: AI Mobility Aid for the Visually Impaired
 
-![Safe Step Thumbnail](watermarked_img_5261543855520221302.jpg)
 
 **Safe Step** is a web-based visual aid application designed for the visually impaired. It utilizes a smartphone's camera to continuously scan the environment, calculates the distance and direction of obstacles, and generates real-time natural AI voice alerts to provide spatial awareness on the go.
 
@@ -21,10 +20,9 @@
 | Category | Technology | Purpose |
 | :--- | :--- | :--- |
 | **Frontend** | Flutter Web, Dart | Cross-platform web app, Camera & Haptic control |
-| **Backend** | Python 3, FastAPI | Async API handling, low-latency processing |
-| **Computer Vision**| YOLO-World, OpenCV | Zero-Shot Object Detection, Spatial calculation |
+| **Backend** | Python , FastAPI | Async API handling, low-latency processing |
+| **Computer Vision**| YOLO-World | Zero-Shot Object Detection, Spatial calculation |
 | **Voice AI** | ElevenLabs API | High-quality, natural Text-to-Speech synthesis |
-| **Infrastructure** | Vercel, Pinggy | Frontend hosting & Secure HTTPS backend tunneling |
 
 ## ⚙️ How It Works (Architecture)
 
